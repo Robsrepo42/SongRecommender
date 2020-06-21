@@ -1,0 +1,10 @@
+"1","
+"
+"1","$SVD_realRatingMatrix
+"
+"1","Recommender method: SVD for realRatingMatrix
+Description: Recommender based on SVD approximation with column-mean imputation.
+Reference: NA
+"
+"1","Parameters:
+"

@@ -1,0 +1,10 @@
+"1","
+"
+"1","$ALS_implicit_realRatingMatrix
+"
+"1","Recommender method: ALS_implicit for realRatingMatrix
+Description: Recommender for implicit data based on latent factors, calculated by alternating least squares algorithm.
+Reference: Yifan Hu, Yehuda Koren, Chris Volinsky (2008). Collaborative Filtering for Implicit Feedback Datasets, ICDM '08 Proceedings of the 2008 Eighth IEEE International Conference on Data Mining, pages 263-272.
+"
+"1","Parameters:
+"

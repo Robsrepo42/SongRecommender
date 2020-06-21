@@ -1,0 +1,9 @@
+"0","recommenderRegistry$get_entries(dataType = ""realRatingMatrix"")"
+"1","$HYBRID_realRatingMatrix
+"
+"1","Recommender method: HYBRID for realRatingMatrix
+Description: Hybrid recommender that aggegates several recommendation strategies using weighted averages.
+Reference: NA
+"
+"1","Parameters:
+"

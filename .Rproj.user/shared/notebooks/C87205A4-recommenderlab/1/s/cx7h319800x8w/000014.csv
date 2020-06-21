@@ -1,0 +1,10 @@
+"1","
+"
+"1","$UBCF_realRatingMatrix
+"
+"1","Recommender method: UBCF for realRatingMatrix
+Description: Recommender based on user-based collaborative filtering.
+Reference: NA
+"
+"1","Parameters:
+"

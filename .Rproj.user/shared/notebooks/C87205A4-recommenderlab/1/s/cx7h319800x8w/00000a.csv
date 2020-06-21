@@ -1,0 +1,10 @@
+"1","
+"
+"1","$LIBMF_realRatingMatrix
+"
+"1","Recommender method: LIBMF for realRatingMatrix
+Description: Matrix factorization with LIBMF via package recosystem (https://cran.r-project.org/web/packages/recosystem/vignettes/introduction.html).
+Reference: NA
+"
+"1","Parameters:
+"

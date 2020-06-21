@@ -1,0 +1,10 @@
+"1","
+"
+"1","$ALS_realRatingMatrix
+"
+"1","Recommender method: ALS for realRatingMatrix
+Description: Recommender for explicit ratings based on latent factors, calculated by alternating least squares algorithm.
+Reference: Yunhong Zhou, Dennis Wilkinson, Robert Schreiber, Rong Pan (2008). Large-Scale Parallel Collaborative Filtering for the Netflix Prize, 4th Int'l Conf. Algorithmic Aspects in Information and Management, LNCS 5034.
+"
+"1","Parameters:
+"
