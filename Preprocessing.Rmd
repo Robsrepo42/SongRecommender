@@ -1,74 +1,78 @@
 ---
-title: "Data Preprocessing"
-author: "Alexander Kleine"
-date: "6/11/2020"
-output: html_document
+title: "R Notebook"
+output: html_notebook
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Setup of the packages:
-```{r}
+```{r echo = FALSE}
 library(tidyverse)
-library(readxl)
+library(data.table)
+library(reshape2)
 ```
 
-Reading in the DF
-```{r}
-diary_AMV <- read_excel("Music Test Data/diary_AMV.xlsx")
-diary_AMV <- diary_AMV[,c(1,7:16)]
-diary_AMV <- data.frame(lapply(diary_AMV[,1:11], as.character), stringsAsFactors=FALSE)
-str(diary_AMV)
-```
-
-Data Preprocessing:
-```{r}
-str(diary_AMV)
-vector_test <- as.integer(as.vector(diary_AMV[[1,2]]))
-str_length(vector_test)
-str_sub(vector_test, 1, 1)
-```
 
 ```{r}
-diary_AMV_sep <- diary_AMV
-
-
-for (u in 1:120) {
-  for (i in 2:11) {
-    diary_AMV_sep[u,i] <- gsub("^,|,$", "", gsub("\\b", ",", diary_AMV_sep[u,i]))
-  }
-}
-rm(i)
-rm(u)
+df <- read_csv("final_df.csv")
 ```
 
-Song Values:
+
+#Missing Values
+One row stands  for 50 Songs in a interval-based rating from 1 to 7 where 1 represent the answer "I don't know this song"
+
+Set value 1 to NA and check all NAs:
+```{r fig.cap = "NA for each Song and the mean"}
+df[-1] <- na_if(df[-1], 1)
+
+apply(df[-1], 2, function(x) sum(is.na(x)))
+mean(apply(df, 2, function(x) sum(is.na(x))))
+```
+
+```{r fig.cap = "NA for each user and the mean"}
+apply(df, 1, function(x) sum(is.na(x)))
+mean(apply(df, 1, function(x) sum(is.na(x))))
+```
+
+Histgram of the matrix:
 ```{r}
-first_df <- as.data.frame(diary_AMV_sep[,2], stringsAsFactors = FALSE)
-all_songs <- first_df %>% separate(1, c("1", "2", "3", "4", "5"))
-
-
-for (i in 3:11) {
-  new_one <- as.data.frame(diary_AMV_sep[,i], stringsAsFactors = FALSE)
-  new_one <- new_one %>% separate(1, c("1", "2", "3", "4", "5"))
-  all_songs <- cbind(all_songs, new_one)
-}
-rm(i)
-
-for (i in 1:50) {
-  colnames(all_songs)[i] <- paste0("SongNr_", i)
-}
+hist_df=data.matrix(df[-1])
+hist(hist_df)  
 ```
 
-Final DF:
+The long tail of rating frequencies:
+
+
+
+#Set up of a dataframe for classification problem as a abstract solution
+This approach considers to not have any missing values. Under this condition we could answer the following classification Problem:
+"Can we predict the rating of a user of the most well-known radio hits based on their rating of 10 Songs?"
+
+First we have to preprocess a dataframe without any missing values out of our given data to match the requirments of a classification problem. This dataframe will have to parts the Training Set and the Test Set.
+
+##Trainig Set: 
+This set will be represent by the peer group. All the independent varibales (Songs rated by the ther peer group as well as the new user) and the dependet varaibles (Songs that are only rated by the peer group). The dependet varaibles are the target varables of our classification problem.
+
+First we will we need to identify the most well known Songs:
 ```{r}
-user <- as.data.frame(diary_AMV[,1], stringsAsFactors = FALSE)
-colnames(user)[1] <- "user"
-
-final_df <- cbind(user, all_songs)
-write_csv(final_df, path = "final_df.csv")
+well_know_songs <- as.data.frame(apply(df[-1], 2, function(x) sum(is.na(x))))
+well_know_songs <- setDT(well_know_songs, keep.rownames = TRUE)
+well_know_songs <-  well_know_songs %>%  
+  rename("Number_of_NA" =  "apply(df[-1], 2, function(x) sum(is.na(x)))")  %>%  
+  arrange(Number_of_NA)
+well_know_songs <- head(well_know_songs, n = 20)
 ```
+
+
+```{r}
+Names <- c("user", t(well_know_songs[,-2]))
+df_classification_training <- subset(df, select=c(Names))
+df_classification_training <- na.omit(df_classification_training)
+apply(df_classification_training, 2, function(x) sum(is.na(x)))
+```
+
+write_csv(df_classification_training, path = "df_classification_training.csv")
+
 
 

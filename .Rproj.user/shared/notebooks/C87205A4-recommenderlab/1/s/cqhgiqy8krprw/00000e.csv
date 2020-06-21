@@ -1,0 +1,20 @@
+"1","
+"
+"1","$RANDOM_realRatingMatrix
+"
+"1","Recommender method: RANDOM for realRatingMatrix
+Description: Produce random recommendations (real ratings).
+Reference: NA
+"
+"1","Parameters: None
+"
+"1","
+"
+"1","$RERECOMMEND_realRatingMatrix
+"
+"1","Recommender method: RERECOMMEND for realRatingMatrix
+Description: Re-recommends highly rated items (real ratings).
+Reference: NA
+"
+"1","Parameters:
+"
