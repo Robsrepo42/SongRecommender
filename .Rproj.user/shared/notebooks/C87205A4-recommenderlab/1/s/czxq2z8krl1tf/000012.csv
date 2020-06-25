@@ -1,0 +1,10 @@
+"1","
+"
+"1","$SVDF_realRatingMatrix
+"
+"1","Recommender method: SVDF for realRatingMatrix
+Description: Recommender based on Funk SVD with gradient descend (https://sifter.org/~simon/journal/20061211.html).
+Reference: NA
+"
+"1","Parameters:
+"

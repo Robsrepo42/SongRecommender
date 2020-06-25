@@ -1,0 +1,17 @@
+base
+knitr
+rmdformats
+Matrix
+arules
+proxy
+registry
+recommenderlab
+readr
+tidyverse
+ggplot2
+tibble
+tidyr
+purrr
+dplyr
+stringr
+forcats
